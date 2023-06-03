@@ -1,0 +1,3635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1058</width>
+    <height>765</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Кредитний калькулятор</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon.ico</normaloff>icon.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label_28">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>10</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Тип расчета:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="type_calc">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>10</y>
+      <width>561</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>40</y>
+      <width>641</width>
+      <height>621</height>
+     </rect>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="alternatingRowColors">
+     <bool>false</bool>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
+    </property>
+    <property name="columnCount">
+     <number>0</number>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="horizontalHeaderHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderHighlightSections">
+     <bool>false</bool>
+    </attribute>
+   </widget>
+   <widget class="QPushButton" name="button_update">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>670</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Обновить</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_json_file">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>670</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>JSON файл настроек</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_calc">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>670</y>
+      <width>281</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Расчитать</string>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>391</width>
+      <height>721</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab_11">
+     <attribute name="title">
+      <string>Условия кредитования</string>
+     </attribute>
+     <widget class="QDoubleSpinBox" name="sum_kred">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>100</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Стоимость</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="perv_vznos">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>70</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="proc_perv_vznos">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>70</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>151</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Дата оформления кредита</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="summa">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>40</y>
+        <width>71</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="summa_ekv">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>40</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="check_recalc">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Расчет по сумме (Да)/
+% (Нет)</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="curr_code">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>40</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>UAH</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>USD</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EUR</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>GBP</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QDoubleSpinBox" name="curs">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>40</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="decimals">
+       <number>4</number>
+      </property>
+      <property name="maximum">
+       <double>1000.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="date_cred">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>10</y>
+        <width>151</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>151</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Первоначальный взнос, %</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>100</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Сумма кредита</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>361</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Условия</string>
+      </property>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>% ставка</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>10</y>
+         <width>61</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>[льготн. 3]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>61</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>[льготн. 2]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>10</y>
+         <width>61</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>[льготн. 1]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>10</y>
+         <width>61</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>[обычная]</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="priv_proc_stavka3">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>30</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="priv_proc_stavka2">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>30</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="priv_proc_stavka">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>30</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="proc_stavka">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>30</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="priv_srok_kred2">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>60</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="priv_srok_kred">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>60</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="srok_kred">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>60</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="priv_srok_kred3">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>60</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="priv_srok_kred_year3">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>90</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="srok_kred_year">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>90</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="priv_srok_kred_year2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>90</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="priv_srok_kred_year">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>90</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Период (мес.)</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>(лет)</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QComboBox" name="type_annuitet">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>260</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>30/360</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>факт/360</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>факт/факт</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>260</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Тип</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="type_proc">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>260</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>классика</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>аннуитетная</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>рассрочка</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Форма погашения</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="GroupBox_rasrochka">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>290</y>
+        <width>361</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Досрочное погашение</string>
+      </property>
+      <widget class="QLabel" name="label_14">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Новая сумма</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="sum_plat">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>20</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>99999999.989999994635582</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="srok_kred_new">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>50</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_19">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>151</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Новый срок кредита (мес.)</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_20">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>50</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>(лет)</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="check_recalc_graf">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>20</y>
+         <width>121</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>С пересчетом</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="srok_kred_year_new">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>50</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_rasrochka">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>370</y>
+        <width>361</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Рассрочка (курсы)</string>
+      </property>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Нач.курс</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="curs_start">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>41</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="curs_year_1">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>40</y>
+         <width>41</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="curs_year_2">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>40</y>
+         <width>41</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="curs_year_3">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>40</y>
+         <width>41</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="curs_year_0">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>40</y>
+         <width>41</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="curs_year_4">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>40</y>
+         <width>41</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="coef_otsech">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>40</y>
+         <width>41</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>1.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="year_0">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>2019</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="year_1">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>2020</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="year_2">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>2021</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="year_3">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>2022</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="year_4">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>2023</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_23">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>20</y>
+         <width>51</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Коэф.от</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>440</y>
+        <width>361</width>
+        <height>241</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Дополнительные расходы (итоги)</string>
+      </property>
+      <widget class="QLabel" name="label_24">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>210</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Переплата</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="pereplata">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>210</y>
+         <width>151</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>99999999.989999994635582</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_16">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>При выдаче</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="month_itog">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>90</y>
+         <width>151</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>99999999.989999994635582</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_17">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>% расходы</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="start_itog">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>30</y>
+         <width>151</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>99999999.989999994635582</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_21">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ежемесячные</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="int_itog">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>60</y>
+         <width>151</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>99999999.989999994635582</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="kvart_itog">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>120</y>
+         <width>151</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>99999999.989999994635582</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_22">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ежеквартальные</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_25">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ежегодные</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="year_itog">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>150</y>
+         <width>151</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>99999999.989999994635582</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_26">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>В конце срока</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="end_itog">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>180</y>
+         <width>151</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>99999999.989999994635582</double>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_12">
+     <attribute name="title">
+      <string>Дополнительные расходы</string>
+     </attribute>
+     <widget class="QLabel" name="comiss_text_1">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Банк - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_1">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_1">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>30</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="comiss_text_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>60</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Банк - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>80</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>110</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Страхование - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_3">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>130</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>160</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Страхование - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_4">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>180</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>210</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Страхование - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_5">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>230</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_6">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>260</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Оформление - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_6">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>280</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_7">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>310</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Оформление - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_7">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>330</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_8">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>360</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Оформление - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_8">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>380</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_9">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>410</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Оформление - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_9">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>430</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_10">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>460</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Оформление - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_10">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>480</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_11">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>510</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Прочие - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_11">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>530</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_12">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>560</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Прочие - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_12">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>580</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="comiss_text_13">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>610</y>
+        <width>361</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <italic>false</italic>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Прочие - </string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="comiss_amount_13">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>630</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>99999999.989999994635582</double>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_2">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>80</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_3">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>130</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_4">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>180</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_5">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>230</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_6">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>280</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_7">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>330</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_8">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>380</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_9">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>430</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_10">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>480</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_11">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>530</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_12">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>580</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comiss_type_13">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>630</y>
+        <width>271</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BA - При выдаче (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BS - При выдаче (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BF - При выдаче (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EA - В конце срока (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ES - В конце срока (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EF - В конце срока (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MA - Eжемесячно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MS - Eжемесячно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MF - Eжемесячно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MZ - Ежемесячно (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KA - Ежеквартально (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KS - Ежеквартально (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KF - Ежеквартально (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KZ - Ежеквартально (% от суммы задолженности)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YA - Ежегодно (сумма)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YS - Ежегодно (% с суммы кредита)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YF - Ежегодно (% от стоимости)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YZ - Ежегодно (% от суммы задолженности)</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="button_export_csv">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>670</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Экспорт в CSV</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1058</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

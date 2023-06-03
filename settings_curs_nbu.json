@@ -1,0 +1,19 @@
+{
+  "main": {
+    "data_format": "json",
+    "curs_nbu_json": {
+      "file_name": "NBU_Exchange",
+      "url": "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=%CURRCODE%&date=%MDATE%&json",
+      "char_curr_code": "cc",
+      "char_curs": "rate",
+      "char_format_date": "%Y%m%d"
+    },
+    "curs_nbu_xml": {
+      "file_name": "NBUStatService",
+      "url": "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=%CURRCODE%&date=%MDATE%",
+      "char_curr_code": "cc",
+      "char_curs": "rate",
+      "char_format_date": "%Y%m%d"
+    }
+  }
+}
