@@ -1,5 +1,5 @@
 # Python_Kred_calc-PyQt6
-Python PyQt6 project - Credit calculator (real estate, auto) (annuity, the classics, installment), with SQLite.
+Python PyQt6 project PyCharm - Credit calculator (real estate, auto) (annuity, the classics, installment), with SQLite.
 
 IDE PyCharm Community Edition
 
@@ -10,14 +10,12 @@ IDE PyCharm Community Edition
 -> pip install python-dateutil
 -> pip install xmltodict
 
-3) Qt Designer встановлений з pyqt6-tools
-   Запустити Qt Designer
--> pyqt6-tools designer
-
-4) Або альтернатива встановленню Qt Designer через pyqt6-tools, якщо pyqt6-tools більш старий пакет використовуємо окрему програму
+2) Qt Designer
+Запускаємо
+-> pyqt6-tools designer або окремо встановлюємо:
    https://build-system.fman.io/qt-designer-download
 
-5) Перетворення *.ui файлу у файл типу *.py
+3) Перетворення *.ui файлу у файл типу *.py
 -> pyuic6 MainWindow.ui -o ui_MainWindow.py
 
 ---------------------------------------------------
