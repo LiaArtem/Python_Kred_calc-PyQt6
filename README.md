@@ -1,7 +1,7 @@
 # Python_Kred_calc-PyQt6
 Python PyQt6 project PyCharm - Credit calculator (real estate, auto) (annuity, the classics, installment), with SQLite.
 
-IDE PyCharm Community Edition
+IDE - PyCharm Community Edition
 
 У командному рядку терміналу IDE
 1) Додаємо бібліотеки
