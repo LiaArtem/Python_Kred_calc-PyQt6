@@ -6,7 +6,7 @@ import urllib.request
 import sqlite3
 import xmltodict
 import calendar
-# import subprocess
+import subprocess
 
 from dateutil.relativedelta import relativedelta
 from calendar import monthrange
@@ -319,7 +319,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.type_proc.currentTextChanged.connect(self.on_type_proc_value_changed)
         self.button_calc.pressed.connect(self.on_button_calc_clicked)
         self.button_update.clicked.connect(self.on_button_update_clicked)
-        self.button_json_file.clicked.connect(self.on_button_json_file_clicked)
+        self.button_json_file.clicked.connect(self.on_button_json_file_clicked_)
         self.button_export_csv.pressed.connect(self.on_button_export_csv_clicked)
 
     ######################################
@@ -1666,9 +1666,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     ######################################
     # event - button_json_file - Clicked
-    def on_button_json_file_clicked(self):
-        # subprocess.call(['notepad.exe', self._list_type_calc_file[self.type_calc.currentIndex()]])
-        os.startfile(self._list_type_calc_file[self.type_calc.currentIndex()])
+    def on_button_json_file_clicked_(self):
+        subprocess.call(['notepad.exe', self._list_type_calc_file[self.type_calc.currentIndex()]])
+        # os.startfile(self._list_type_calc_file[self.type_calc.currentIndex()])
 
     ######################################
     # event - button_export_csv - Clicked
