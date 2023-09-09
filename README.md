@@ -31,5 +31,5 @@ IDE - PyCharm Community Edition
 1) Ставимо pyinstaller
 -> pip install pyinstaller
 
-2) Запускаємо файл .\CurrencyChart_create_EXE_file.bat для автоматичної збірки exe файла
+2) Запускаємо файл .\Kred_calc_create_EXE_file.bat для автоматичної збірки exe файла
 Сформований файл буде розташований у каталозі \dist\
