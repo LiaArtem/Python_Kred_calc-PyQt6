@@ -3,6 +3,10 @@ Python PyQt6 project PyCharm - Credit calculator (real estate, auto) (annuity, t
 
 IDE - PyCharm Community Edition
 
+- Перевірка якості кода ruff check
+-> pip install ruff
+-> ruff check main.py
+
 У командному рядку терміналу IDE
 1) Додаємо бібліотеки
 -> pip install PyQt6

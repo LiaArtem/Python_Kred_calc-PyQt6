@@ -12,14 +12,16 @@ from dateutil.relativedelta import relativedelta
 from calendar import monthrange
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtGui import QColor, QIcon
-from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox, QWidget
+from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox, QWidget
 from ui_MainWindow import Ui_MainWindow
 
 
 class Error_MessageBox_Window(QWidget):
     def __init__(self, text_error, is_exit=True):
         super().__init__()
-        dialog = QMessageBox.critical(self, "Error", text_error, QMessageBox.StandardButton.Ok)
+        dialog = QMessageBox.critical(self, "Error", text_error,
+                                      QMessageBox.StandardButton.Ok)
         if dialog == QMessageBox.StandardButton.Ok and is_exit:
             sys.exit()
 
@@ -31,7 +33,8 @@ class Read_curs:
         try:
             file_settings = 'settings_curs_nbu.json'
             if not os.path.isfile(file_settings):
-                Error_MessageBox_Window(text_error="File 'settings_curs_nbu.json' not found").show()
+                Error_MessageBox_Window(
+                    text_error="File 'settings_curs_nbu.json' not found").show()
 
             # Opening JSON file
             f = open(file='settings_curs_nbu.json', mode="r", encoding="utf8")
@@ -42,7 +45,8 @@ class Read_curs:
                 self.url = data['main']['curs_nbu_json']['url']
                 self.char_curr_code = data['main']['curs_nbu_json']['char_curr_code']
                 self.char_curs = data['main']['curs_nbu_json']['char_curs']
-                self.char_format_date = data['main']['curs_nbu_json']['char_format_date']
+                self.char_format_date = (
+                    data)['main']['curs_nbu_json']['char_format_date']
             elif self.data_format == 'xml':
                 self.file_name = data['main']['curs_nbu_xml']['file_name']
                 self.url = data['main']['curs_nbu_xml']['url']
@@ -50,8 +54,10 @@ class Read_curs:
                 self.char_curs = data['main']['curs_nbu_xml']['char_curs']
                 self.char_format_date = data['main']['curs_nbu_xml']['char_format_date']
             else:
-                Error_MessageBox_Window(text_error="File 'settings_curs_nbu.json' -> parameter 'data_format' not in "
-                                                   "'xml' or 'json'").show()
+                Error_MessageBox_Window(
+                    text_error="File 'settings_curs_nbu.json' -> "
+                               "parameter 'data_format' not in "
+                               "'xml' or 'json'").show()
 
             # Closing file
             f.close()
@@ -59,20 +65,25 @@ class Read_curs:
             # connect sqlite3
             con = sqlite3.connect("curs.db")
             cursor = con.cursor()
-            cursor.execute("""CREATE TABLE IF NOT EXISTS CURS
-                            (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  
-                             CURS_DATE INTEGER NOT NULL, 
-                             CURR_CODE TEXT NOT NULL,
-                             RATE REAL NOT NULL CHECK(RATE > 0),
-                             FORC INTEGER NOT NULL CHECK(FORC > 0)
-                             )
-                        """)
-            cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS UK_CURS ON CURS (CURS_DATE, CURR_CODE)")
+            cursor.execute(
+                """CREATE TABLE IF NOT EXISTS CURS
+                (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  
+                 CURS_DATE INTEGER NOT NULL, 
+                 CURR_CODE TEXT NOT NULL,
+                 RATE REAL NOT NULL CHECK(RATE > 0),
+                 FORC INTEGER NOT NULL CHECK(FORC > 0)
+                 )
+            """)
+            cursor.execute(
+                "CREATE UNIQUE INDEX IF NOT EXISTS "
+                "UK_CURS ON CURS (CURS_DATE, CURR_CODE)")
 
             # check curs
             is_request_curs = True
             params = (date_cred.strftime("%Y-%m-%d"), curr_code)
-            cursor.execute("SELECT RATE/FORC AS CURS_AMOUNT FROM CURS WHERE CURS_DATE = ? AND CURR_CODE = ?", params)
+            cursor.execute(
+                "SELECT RATE/FORC AS CURS_AMOUNT FROM CURS "
+                "WHERE CURS_DATE = ? AND CURR_CODE = ?", params)
             rows = cursor.fetchall()
             for row in rows:
                 self.curs_amount = float(row[0])
@@ -80,8 +91,9 @@ class Read_curs:
 
             if is_request_curs:
                 # Read url
-                url = self.url.replace("%MDATE%", date_cred.strftime(self.char_format_date)).replace("%CURRCODE%",
-                                                                                                     curr_code)
+                url = (self.url.replace("%MDATE%",
+                                        date_cred.strftime(self.char_format_date))
+                       .replace("%CURRCODE%", curr_code))
                 webURL = urllib.request.urlopen(url)
                 data = webURL.read()
 
@@ -94,7 +106,9 @@ class Read_curs:
                                   json_line[self.char_curs],
                                   1)
                         cursor.execute(
-                            "INSERT OR IGNORE INTO CURS(curs_date, curr_code, rate, forc) VALUES(?, ?, ?, ?)",
+                            "INSERT OR IGNORE INTO CURS"
+                            "(curs_date, curr_code, rate, forc) "
+                            "VALUES(?, ?, ?, ?)",
                             params)
                 elif self.data_format == 'xml':
                     JSON_object = xmltodict.parse(data.decode('utf-8'))
@@ -104,13 +118,17 @@ class Read_curs:
                               json_line[self.char_curr_code],
                               json_line[self.char_curs],
                               1)
-                    cursor.execute("INSERT OR IGNORE INTO CURS(curs_date, curr_code, rate, forc) VALUES(?, ?, ?, ?)",
-                                   params)
+                    cursor.execute(
+                        "INSERT OR IGNORE INTO CURS(curs_date, curr_code, rate, forc) "
+                        "VALUES(?, ?, ?, ?)",
+                        params)
 
                 # read new curs
                 params = (date_cred.strftime("%Y-%m-%d"), curr_code)
-                cursor.execute("SELECT RATE/FORC AS CURS_AMOUNT FROM CURS WHERE CURS_DATE = ? AND CURR_CODE = ?",
-                               params)
+                cursor.execute(
+                    "SELECT RATE/FORC AS CURS_AMOUNT FROM CURS "
+                    "WHERE CURS_DATE = ? AND CURR_CODE = ?",
+                    params)
                 rows = cursor.fetchall()
                 for row in rows:
                     self.curs_amount = float(row[0])
@@ -128,9 +146,11 @@ class Read_type_calc:
         try:
             dir_ini = os.getcwd() + "\\ini"
             if not os.path.isdir(dir_ini):
-                Error_MessageBox_Window(text_error=dir_ini + " directory not found").show()
+                Error_MessageBox_Window(
+                    text_error=dir_ini + " directory not found").show()
 
-            filenames = [fn for fn in os.listdir(dir_ini) if fn.split(".")[-1] in ["json"]]
+            filenames = [fn for fn in os.listdir(dir_ini)
+                         if fn.split(".")[-1] in ["json"]]
             self.list_type_calc = []
             self.list_type_calc_file = []
             for idx, file in enumerate(filenames):
@@ -162,31 +182,40 @@ class Update_type_calc:
             self.param_main_curr_code = data['primary']['main']['curr_code']
             self.param_main_summa = float(data['primary']['main']['summa'])
             self.param_main_curs = float(
-                1 if data['primary']['main']['curs'] is None else data['primary']['main'][
+                1 if data['primary']['main']['curs'] is None
+                else data['primary']['main'][
                     'curs'])
             self.param_main_perv_vznos_proc = float(
-                -1 if data['primary']['main']['perv_vznos_proc'] is None else data['primary']['main'][
+                -1 if data['primary']['main']['perv_vznos_proc'] is None
+                else data['primary']['main'][
                     'perv_vznos_proc'])
             self.param_main_perv_vznos = float(
-                -1 if data['primary']['main']['perv_vznos'] is None else data['primary']['main'][
+                -1 if data['primary']['main']['perv_vznos'] is None
+                else data['primary']['main'][
                     'perv_vznos'])
             self.param_main_priv_proc_stavka = float(
-                0 if data['primary']['main']['priv_proc_stavka'] is None else data['primary']['main'][
+                0 if data['primary']['main']['priv_proc_stavka'] is None
+                else data['primary']['main'][
                     'priv_proc_stavka'])
             self.param_main_priv_srok = int(
-                0 if data['primary']['main']['priv_srok'] is None else data['primary']['main'][
+                0 if data['primary']['main']['priv_srok'] is None
+                else data['primary']['main'][
                     'priv_srok'])
             self.param_main_priv_proc_stavka_2 = float(
-                0 if data['primary']['main']['priv_proc_stavka_2'] is None else data['primary']['main'][
+                0 if data['primary']['main']['priv_proc_stavka_2'] is None
+                else data['primary']['main'][
                     'priv_proc_stavka_2'])
             self.param_main_priv_srok_2 = int(
-                0 if data['primary']['main']['priv_srok_2'] is None else data['primary']['main'][
+                0 if data['primary']['main']['priv_srok_2'] is None
+                else data['primary']['main'][
                     'priv_srok_2'])
             self.param_main_priv_proc_stavka_3 = float(
-                0 if data['primary']['main']['priv_proc_stavka_3'] is None else data['primary']['main'][
+                0 if data['primary']['main']['priv_proc_stavka_3'] is None
+                else data['primary']['main'][
                     'priv_proc_stavka_3'])
             self.param_main_priv_srok_3 = int(
-                0 if data['primary']['main']['priv_srok_3'] is None else data['primary']['main'][
+                0 if data['primary']['main']['priv_srok_3'] is None
+                else data['primary']['main'][
                     'priv_srok_3'])
 
             self.param_main_srok = int(data['primary']['main']['srok'])
@@ -297,7 +326,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.srok_kred_new.valueChanged.connect(self.on_srok_cred_new_value_changed)
 
         # init
-        self.date_cred.setDateTime(QtCore.QDateTime(QtCore.QDate.currentDate(), QtCore.QTime.currentTime()))
+        self.date_cred.setDateTime(
+            QtCore.QDateTime(QtCore.QDate.currentDate(), QtCore.QTime.currentTime()))
 
         # read type calc
         tc = Read_type_calc()
@@ -371,11 +401,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # read type calc params
         update_tc = Update_type_calc(list_type_calc_file)
         #
-        self.priv_proc_stavka.setProperty("value", update_tc.param_main_priv_proc_stavka)
+        self.priv_proc_stavka.setProperty(
+            "value", update_tc.param_main_priv_proc_stavka)
         self.priv_srok_kred.setProperty("value", update_tc.param_main_priv_srok)
-        self.priv_proc_stavka2.setProperty("value", update_tc.param_main_priv_proc_stavka_2)
+        self.priv_proc_stavka2.setProperty(
+            "value", update_tc.param_main_priv_proc_stavka_2)
         self.priv_srok_kred2.setProperty("value", update_tc.param_main_priv_srok_2)
-        self.priv_proc_stavka3.setProperty("value", update_tc.param_main_priv_proc_stavka_2)
+        self.priv_proc_stavka3.setProperty(
+            "value", update_tc.param_main_priv_proc_stavka_2)
         self.priv_srok_kred3.setProperty("value", update_tc.param_main_priv_srok_3)
         #
         self.curs.setProperty("value", update_tc.param_main_curs)
@@ -385,61 +418,74 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #
         self._bank_comiss_text = "Банк - "
         self.comiss_amount_1.setProperty("value", update_tc.param_bank_comiss_1[0])
-        self.comiss_text_1.setText(self._bank_comiss_text + update_tc.param_bank_comiss_1[2])
+        self.comiss_text_1.setText(self._bank_comiss_text +
+                                   update_tc.param_bank_comiss_1[2])
         self.get_index_comiss_text(update_tc.param_bank_comiss_1[1])
         self.comiss_type_1.setCurrentIndex(self._index_comiss)
         self.comiss_amount_2.setProperty("value", update_tc.param_bank_comiss_2[0])
-        self.comiss_text_2.setText(self._bank_comiss_text + update_tc.param_bank_comiss_2[2])
+        self.comiss_text_2.setText(self._bank_comiss_text +
+                                   update_tc.param_bank_comiss_2[2])
         self.get_index_comiss_text(update_tc.param_bank_comiss_2[1])
         self.comiss_type_2.setCurrentIndex(self._index_comiss)
         #
         self._stra_comiss_text = 'Страхование - '
         self.comiss_amount_3.setProperty("value", update_tc.param_stra_comiss_1[0])
-        self.comiss_text_3.setText(self._stra_comiss_text + update_tc.param_stra_comiss_1[2])
+        self.comiss_text_3.setText(self._stra_comiss_text +
+                                   update_tc.param_stra_comiss_1[2])
         self.get_index_comiss_text(update_tc.param_stra_comiss_1[1])
         self.comiss_type_3.setCurrentIndex(self._index_comiss)
         self.comiss_amount_4.setProperty("value", update_tc.param_stra_comiss_2[0])
-        self.comiss_text_4.setText(self._stra_comiss_text + update_tc.param_stra_comiss_2[2])
+        self.comiss_text_4.setText(self._stra_comiss_text +
+                                   update_tc.param_stra_comiss_2[2])
         self.get_index_comiss_text(update_tc.param_stra_comiss_2[1])
         self.comiss_type_4.setCurrentIndex(self._index_comiss)
         self.comiss_amount_5.setProperty("value", update_tc.param_stra_comiss_3[0])
-        self.comiss_text_5.setText(self._stra_comiss_text + update_tc.param_stra_comiss_3[2])
+        self.comiss_text_5.setText(self._stra_comiss_text +
+                                   update_tc.param_stra_comiss_3[2])
         self.get_index_comiss_text(update_tc.param_stra_comiss_3[1])
         self.comiss_type_5.setCurrentIndex(self._index_comiss)
         #
         self._nota_comiss_text = 'Оформление - '
         self.comiss_amount_6.setProperty("value", update_tc.param_nota_comiss_1[0])
-        self.comiss_text_6.setText(self._nota_comiss_text + update_tc.param_nota_comiss_1[2])
+        self.comiss_text_6.setText(self._nota_comiss_text +
+                                   update_tc.param_nota_comiss_1[2])
         self.get_index_comiss_text(update_tc.param_nota_comiss_1[1])
         self.comiss_type_6.setCurrentIndex(self._index_comiss)
         self.comiss_amount_7.setProperty("value", update_tc.param_nota_comiss_2[0])
-        self.comiss_text_7.setText(self._nota_comiss_text + update_tc.param_nota_comiss_2[2])
+        self.comiss_text_7.setText(self._nota_comiss_text +
+                                   update_tc.param_nota_comiss_2[2])
         self.get_index_comiss_text(update_tc.param_nota_comiss_2[1])
         self.comiss_type_7.setCurrentIndex(self._index_comiss)
         self.comiss_amount_8.setProperty("value", update_tc.param_nota_comiss_3[0])
-        self.comiss_text_8.setText(self._nota_comiss_text + update_tc.param_nota_comiss_3[2])
+        self.comiss_text_8.setText(self._nota_comiss_text +
+                                   update_tc.param_nota_comiss_3[2])
         self.get_index_comiss_text(update_tc.param_nota_comiss_3[1])
         self.comiss_type_8.setCurrentIndex(self._index_comiss)
         self.comiss_amount_9.setProperty("value", update_tc.param_nota_comiss_4[0])
-        self.comiss_text_9.setText(self._nota_comiss_text + update_tc.param_nota_comiss_4[2])
+        self.comiss_text_9.setText(self._nota_comiss_text +
+                                   update_tc.param_nota_comiss_4[2])
         self.get_index_comiss_text(update_tc.param_nota_comiss_4[1])
         self.comiss_type_9.setCurrentIndex(self._index_comiss)
         self.comiss_amount_10.setProperty("value", update_tc.param_nota_comiss_5[0])
-        self.comiss_text_10.setText(self._nota_comiss_text + update_tc.param_nota_comiss_5[2])
+        self.comiss_text_10.setText(self._nota_comiss_text +
+                                    update_tc.param_nota_comiss_5[2])
         self.get_index_comiss_text(update_tc.param_nota_comiss_5[1])
         self.comiss_type_10.setCurrentIndex(self._index_comiss)
         #
         self._riel_comiss_text = 'Прочие - '
         self.comiss_amount_11.setProperty("value", update_tc.param_riel_comiss_1[0])
-        self.comiss_text_11.setText(self._riel_comiss_text + update_tc.param_riel_comiss_1[2])
+        self.comiss_text_11.setText(self._riel_comiss_text +
+                                    update_tc.param_riel_comiss_1[2])
         self.get_index_comiss_text(update_tc.param_riel_comiss_1[1])
         self.comiss_type_11.setCurrentIndex(self._index_comiss)
         self.comiss_amount_12.setProperty("value", update_tc.param_riel_comiss_2[0])
-        self.comiss_text_12.setText(self._riel_comiss_text + update_tc.param_riel_comiss_2[2])
+        self.comiss_text_12.setText(self._riel_comiss_text +
+                                    update_tc.param_riel_comiss_2[2])
         self.get_index_comiss_text(update_tc.param_riel_comiss_2[1])
         self.comiss_type_12.setCurrentIndex(self._index_comiss)
         self.comiss_amount_13.setProperty("value", update_tc.param_riel_comiss_3[0])
-        self.comiss_text_13.setText(self._riel_comiss_text + update_tc.param_riel_comiss_3[2])
+        self.comiss_text_13.setText(self._riel_comiss_text +
+                                    update_tc.param_riel_comiss_3[2])
         self.get_index_comiss_text(update_tc.param_riel_comiss_3[1])
         self.comiss_type_13.setCurrentIndex(self._index_comiss)
         #
@@ -452,7 +498,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.coef_otsech.setProperty("value", update_tc.param_rasrochka_curs[6])
         #
         self.type_annuitet.setCurrentText(update_tc.param_main_type_proc_n)
-        self.type_annuitet.setEnabled(False if update_tc.param_main_type_proc_n is None else True)
+        self.type_annuitet.setEnabled(
+            False if update_tc.param_main_type_proc_n is None else True)
 
         if update_tc.param_main_curr_code == "":
             pass
@@ -466,7 +513,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.is_exists_perv_vznos_proc = True
             self.proc_perv_vznos.setEnabled(True)
             self.check_recalc.setChecked(False)
-            self.proc_perv_vznos.setProperty("value", update_tc.param_main_perv_vznos_proc)
+            self.proc_perv_vznos.setProperty(
+                "value", update_tc.param_main_perv_vznos_proc)
 
         if update_tc.param_main_perv_vznos < 0:
             self.is_exists_perv_vznos = False
@@ -475,7 +523,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.is_exists_perv_vznos = True
             self.perv_vznos.setEnabled(True)
             self.check_recalc.setChecked(True)
-            self.perv_vznos.setProperty("value", update_tc.param_main_perv_vznos)
+            self.perv_vznos.setProperty(
+                "value", update_tc.param_main_perv_vznos)
 
         match update_tc.param_main_type_proc:
             case "K":
@@ -517,8 +566,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # calc
         if self.is_exists_perv_vznos_proc:
-            self.perv_vznos.setProperty("value",
-                                        self.proc_perv_vznos.value() * self.summa.value() * self.curs.value() / 100)
+            self.perv_vznos.setProperty(
+                "value",
+                self.proc_perv_vznos.value() * self.summa.value()
+                * self.curs.value() / 100)
 
         self.summa_ekv.setProperty("value", self.summa.value() * self.curs.value())
         calc_sum_cred = self.summa_ekv.value() - self.perv_vznos.value()
@@ -543,7 +594,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.month_itog.setProperty("value", self.sum_dop_m)
         self.kvart_itog.setProperty("value", self.sum_dop_k)
         self.year_itog.setProperty("value", self.sum_dop_y)
-        pereplata = self.sum_dop_b + self.sum_dop_e + self.sum_dop_m + self.sum_dop_k + self.sum_dop_y
+        pereplata = (self.sum_dop_b + self.sum_dop_e +
+                     self.sum_dop_m + self.sum_dop_k + self.sum_dop_y)
         self.pereplata.setProperty("value", pereplata)
 
         self.paint_table_column()
@@ -552,8 +604,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # calc params
     def calc_param(self, is_perv_vznos_proc=True):
         if self.is_exists_perv_vznos_proc and is_perv_vznos_proc:
-            self.perv_vznos.setProperty("value",
-                                        self.proc_perv_vznos.value() * self.summa.value() * self.curs.value() / 100)
+            self.perv_vznos.setProperty(
+                "value",
+                self.proc_perv_vznos.value() * self.summa.value()
+                * self.curs.value() / 100)
 
         self.summa_ekv.setProperty("value", self.summa.value() * self.curs.value())
         calc_sum_cred = self.summa_ekv.value() - self.perv_vznos.value()
@@ -715,63 +769,83 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         match _index_dop:
             case 0:
                 self._comiss_type = "BA"  # BA - При выдаче (сумма)
-                self._amount_dop = _amount if _date_start == _date else 0
+                self._amount_dop = _amount \
+                    if _date_start == _date else 0
                 self._amount_dop_b = self._amount_dop
             case 1:
-                self._comiss_type = "BS"  # BS - При выдаче (% с суммы кредита)
-                self._amount_dop = (_sum_cred * _amount / 100) if _date_start == _date else 0
+                # BS - При выдаче (% с суммы кредита)
+                self._comiss_type = "BS"
+                self._amount_dop = (_sum_cred * _amount / 100) \
+                    if _date_start == _date else 0
                 self._amount_dop_b = self._amount_dop
             case 2:
-                self._comiss_type = "BF"  # BF - При выдаче (% от стоимости)
-                self._amount_dop = (_summa_ekv * _amount / 100) if _date_start == _date else 0
+                # BF - При выдаче (% от стоимости)
+                self._comiss_type = "BF"
+                self._amount_dop = (_summa_ekv * _amount / 100) \
+                    if _date_start == _date else 0
                 self._amount_dop_b = self._amount_dop
             case 3:
                 self._comiss_type = "EA"  # EA - В конце срока (сумма)
                 self._amount_dop = _amount if _date_end == _date else 0
                 self._amount_dop_e = self._amount_dop
             case 4:
-                self._comiss_type = "ES"  # ES - В конце срока (% с суммы кредита)
-                self._amount_dop = (_sum_cred * _amount / 100) if _date_end == _date else 0
+                # ES - В конце срока (% с суммы кредита)
+                self._comiss_type = "ES"
+                self._amount_dop = (_sum_cred * _amount / 100) \
+                    if _date_end == _date else 0
                 self._amount_dop_e = self._amount_dop
             case 5:
-                self._comiss_type = "EF"  # EF - В конце срока (% от стоимости)
-                self._amount_dop = (_summa_ekv * _amount / 100) if _date_end == _date else 0
+                # EF - В конце срока (% от стоимости)
+                self._comiss_type = "EF"
+                self._amount_dop = (_summa_ekv * _amount / 100) \
+                    if _date_end == _date else 0
                 self._amount_dop_e = self._amount_dop
             case 6:
                 self._comiss_type = "MA"  # MA - Eжемесячно (сумма)
                 self._amount_dop = 0 if _date_start == _date else _amount
                 self._amount_dop_m = self._amount_dop
             case 7:
-                self._comiss_type = "MS"  # MS - Eжемесячно (% с суммы кредита)
-                self._amount_dop = 0 if _date_start == _date else (_sum_cred * _amount / 100)
+                # MS - Eжемесячно (% с суммы кредита)
+                self._comiss_type = "MS"
+                self._amount_dop = 0 \
+                    if _date_start == _date else (_sum_cred * _amount / 100)
                 self._amount_dop_m = self._amount_dop
             case 8:
                 self._comiss_type = "MF"  # MF - Eжемесячно (% от стоимости)
-                self._amount_dop = 0 if _date_start == _date else (_summa_ekv * _amount / 100)
+                self._amount_dop = 0 \
+                    if _date_start == _date else (_summa_ekv * _amount / 100)
                 self._amount_dop_m = self._amount_dop
             case 9:
-                self._comiss_type = "MZ"  # MZ - Ежемесячно (% от суммы задолженности)
-                self._amount_dop = 0 if _date_start == _date else (_sum_ost * _amount / 100)
+                # MZ - Ежемесячно (% от суммы задолженности)
+                self._comiss_type = "MZ"
+                self._amount_dop = 0 \
+                    if _date_start == _date else (_sum_ost * _amount / 100)
                 self._amount_dop_m = self._amount_dop
             case 10:
                 self._comiss_type = "KA"  # KA - Ежеквартально (сумма)
-                self._amount_dop = _amount if _date.strftime('%m') in self._kvartal else 0
+                self._amount_dop = _amount \
+                    if _date.strftime('%m') in self._kvartal else 0
                 self._amount_dop_k = self._amount_dop
             case 11:
                 self._comiss_type = "KS"  # KS - Ежеквартально (% с суммы кредита)
-                self._amount_dop = (_sum_cred * _amount / 100) if _date.strftime('%m') in self._kvartal else 0
+                self._amount_dop = (_sum_cred * _amount / 100) \
+                    if _date.strftime('%m') in self._kvartal else 0
                 self._amount_dop_k = self._amount_dop
             case 12:
                 self._comiss_type = "KF"  # KF - Ежеквартально (% от стоимости)
-                self._amount_dop = (_summa_ekv * _amount / 100) if _date.strftime('%m') in self._kvartal else 0
+                self._amount_dop = (_summa_ekv * _amount / 100) \
+                    if _date.strftime('%m') in self._kvartal else 0
                 self._amount_dop_k = self._amount_dop
             case 13:
-                self._comiss_type = "KZ"  # KZ - Ежеквартально (% от суммы задолженности)
-                self._amount_dop = (_sum_ost * _amount / 100) if _date.strftime('%m') in self._kvartal else 0
+                # KZ - Ежеквартально (% от суммы задолженности)
+                self._comiss_type = "KZ"
+                self._amount_dop = (_sum_ost * _amount / 100) \
+                    if _date.strftime('%m') in self._kvartal else 0
                 self._amount_dop_k = self._amount_dop
             case 14:
                 self._comiss_type = "YA"  # YA - Ежегодно (сумма)
-                self._amount_dop = _amount if _date_start.strftime('%m') == _date.strftime('%m') else 0
+                self._amount_dop = _amount if (_date_start.strftime('%m') ==
+                                               _date.strftime('%m')) else 0
                 self._amount_dop_y = self._amount_dop
             case 15:
                 self._comiss_type = "YS"  # YS - Ежегодно (% с суммы кредита)
@@ -798,7 +872,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def paint_table_column(self, datarow=None):
         if datarow is None:
             datarow = []
-        m_datacol = ["Дата", "Долг", "Плат.%", "Плат.тело", "Переплата", "Плат.доп.", "Итого"]
+        m_datacol = ["Дата", "Долг", "Плат.%", "Плат.тело",
+                     "Переплата", "Плат.доп.", "Итого"]
 
         self.tableWidget.setRowCount(len(datarow))
         self.tableWidget.setColumnCount(len(m_datacol))
@@ -817,9 +892,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 item = QTableWidgetItem(data_row[col])
                 item.setBackground(color)
                 if col == 0:
-                    item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignVCenter | QtCore.Qt.AlignmentFlag.AlignHCenter)
+                    item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignVCenter |
+                                          QtCore.Qt.AlignmentFlag.AlignHCenter)
                 else:
-                    item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignVCenter | QtCore.Qt.AlignmentFlag.AlignRight)
+                    item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignVCenter |
+                                          QtCore.Qt.AlignmentFlag.AlignRight)
                 self.tableWidget.setItem(row, col, item)
             self.tableWidget.setRowHeight(row, 15)
 
@@ -852,8 +929,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.buff_sum_dop_m = 0
 
         if m_sum_kred == 0:
-            Error_MessageBox_Window("Расчет и вывод графика невозможен !!! Не расчитана СУММА КРЕДИТА!!!",
-                                    is_exit=False).show()
+            Error_MessageBox_Window(
+                "Расчет и вывод графика невозможен !!! Не расчитана СУММА КРЕДИТА!!!",
+                is_exit=False).show()
             return
 
         # Аннуитет
@@ -865,10 +943,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     zc = 30
                     zn = 360
                 case "факт/360":
-                    zc = monthrange(self.date_cred.date().toPyDate().year, self.date_cred.date().toPyDate().month)[1]
+                    zc = monthrange(self.date_cred.date().toPyDate().year,
+                                    self.date_cred.date().toPyDate().month)[1]
                     zn = 360
                 case "факт/факт":
-                    zc = monthrange(self.date_cred.date().toPyDate().year, self.date_cred.date().toPyDate().month)[1]
+                    zc = monthrange(self.date_cred.date().toPyDate().year,
+                                    self.date_cred.date().toPyDate().month)[1]
                     zn = 365 + calendar.isleap(self.date_cred.date().toPyDate().year)
                 case _:
                     zc = 30
@@ -882,7 +962,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if m_priv_proc_stavka == 0:
                 annuitet_priv = m_sum_kred / m_srok
             else:
-                annuitet_priv = (m_priv_proc_stavka / (1.00 - (1.00 + m_priv_proc_stavka ** -m_srok))) * m_sum_kred
+                annuitet_priv = (
+                        (m_priv_proc_stavka / (1.00 - (
+                                1.00 + m_priv_proc_stavka ** -m_srok))) * m_sum_kred)
 
             # Переплата по кредиту
             sum_pereplata = 0
@@ -909,7 +991,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         annuitet = summ / (m_srok - m_priv_srok)
                     else:
                         annuitet = (m_proc_stavka_buff /
-                                    (1.00 - (1.00 + m_proc_stavka_buff) ** -(m_srok - m_priv_srok))) * summ
+                                    (1.00 - (1.00 + m_proc_stavka_buff)
+                                     ** -(m_srok - m_priv_srok))) * summ
                     summ_pro = summ * m_proc_stavka_buff
 
                 # расчет аннуитета (с пересчетом)
@@ -923,7 +1006,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         annuitet = summ / (m_srok - i + 1)
                     else:
                         annuitet = (m_proc_stavka_buff /
-                                    (1.00 - (1.00 + m_proc_stavka_buff) ** -(m_srok - i + 1))) * summ
+                                    (1.00 - (1.00 + m_proc_stavka_buff)
+                                     ** -(m_srok - i + 1))) * summ
                     summ_pro = summ * m_proc_stavka_buff
 
                 if m_sum_plat > annuitet:
@@ -935,8 +1019,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     mTColorType = QColor(240, 248, 255)  # AliceBlue
 
                 # корректируем последний этап переплаты
-                if (summ_calc_pereplata - annuitet - sum_pereplata + m_proc_stavka_buff * summ) < 0 < m_sum_plat:
-                    sum_pereplata = m_sum_kred - summ_itog_pereplata - summ_plat - (annuitet - summ_pro)
+                if ((summ_calc_pereplata - annuitet - sum_pereplata +
+                     m_proc_stavka_buff * summ)
+                        < 0 < m_sum_plat):
+                    sum_pereplata = (m_sum_kred - summ_itog_pereplata
+                                     - summ_plat - (annuitet - summ_pro))
 
                 # учет ежегодных
                 # year itog
@@ -963,16 +1050,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.month_itog.setProperty("value", self.buff_sum_dop_m)
 
                 # добавляем строку
-                self._datarow.insert(i - 1,
-                                     (d_date.strftime("%Y.%m"),
-                                      "{:.2f}".format(summ),
-                                      "{:.2f}".format(summ_pro),
-                                      "{:.2f}".format((annuitet - summ_pro)),
-                                      "{:.2f}".format(sum_pereplata),
-                                      "{:.2f}".format((m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal)),
-                                      "{:.2f}".format((annuitet + m_sum_one + m_sum_year +
-                                                       m_sum_month + m_sum_kvartal + sum_pereplata)),
-                                      mTColorType))
+                (self._datarow.insert
+                 (i - 1,
+                  (d_date.strftime("%Y.%m"),
+                   "{:.2f}".format(summ),
+                   "{:.2f}".format(summ_pro),
+                   "{:.2f}".format((annuitet - summ_pro)),
+                   "{:.2f}".format(sum_pereplata),
+                   "{:.2f}".format((m_sum_one + m_sum_year +
+                                    m_sum_month + m_sum_kvartal)),
+                   "{:.2f}".format((annuitet + m_sum_one + m_sum_year +
+                                    m_sum_month + m_sum_kvartal
+                                    + sum_pereplata)),
+                   mTColorType)))
                 # +1 месяц
                 d_date = d_date + relativedelta(months=1)
                 summ_plat += annuitet - summ_pro
@@ -983,16 +1073,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 if not self.check_recalc_graf.isChecked():
                     summ = summ - annuitet + m_proc_stavka_buff * summ
                 else:
-                    summ = summ - annuitet + m_proc_stavka_buff * summ - sum_pereplata
+                    summ = (summ - annuitet +
+                            m_proc_stavka_buff * summ - sum_pereplata)
 
                 summ_pro = summ * m_proc_stavka_buff
-                summ_dop = summ_dop + m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal
+                summ_dop = (summ_dop + m_sum_one + m_sum_year
+                            + m_sum_month + m_sum_kvartal)
                 m_sum_one = 0
                 if summ < 0:
                     break
 
                 # с учетом переплаты
-                summ_calc_pereplata = summ_calc_pereplata - annuitet - sum_pereplata + m_proc_stavka_buff * summ
+                summ_calc_pereplata = (summ_calc_pereplata - annuitet
+                                       - sum_pereplata + m_proc_stavka_buff * summ)
                 if summ_calc_pereplata < 0:
                     break
                 i += 1
@@ -1013,14 +1106,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # добавляем
             if m_sum_end > 0:
                 i_end = len(self._datarow) - 1
-                self._datarow[i_end] = (self._datarow[i_end][0],
-                                        self._datarow[i_end][1],
-                                        self._datarow[i_end][2],
-                                        self._datarow[i_end][3],
-                                        self._datarow[i_end][4],
-                                        "{:.2f}".format(float(self._datarow[i_end][5]) + m_sum_end),
-                                        "{:.2f}".format(float(self._datarow[i_end][6]) + m_sum_end),
-                                        self._datarow[i_end][7])
+                self._datarow[i_end] = \
+                    (self._datarow[i_end][0],
+                     self._datarow[i_end][1],
+                     self._datarow[i_end][2],
+                     self._datarow[i_end][3],
+                     self._datarow[i_end][4],
+                     "{:.2f}".format(float(self._datarow[i_end][5]) + m_sum_end),
+                     "{:.2f}".format(float(self._datarow[i_end][6]) + m_sum_end),
+                     self._datarow[i_end][7])
 
             # Итого
             mTColorType = QColor(144, 238, 144)  # LightGreen
@@ -1031,7 +1125,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                   "{:.2f}".format(summ_plat),
                                   "{:.2f}".format(summ_itog_pereplata),
                                   "{:.2f}".format(summ_dop),
-                                  "{:.2f}".format((summ_calc_pro + summ_plat + summ_itog_pereplata + summ_dop)),
+                                  "{:.2f}".format((summ_calc_pro + summ_plat +
+                                                   summ_itog_pereplata + summ_dop)),
                                   mTColorType))
             # Переплата
             mTColorType = QColor(173, 216, 230)  # LightBlue
@@ -1046,7 +1141,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                   mTColorType))
             self.pereplata.setProperty("value", (summ_calc_pro + summ_dop))
 
-        # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         # Стандартный
         elif m_type_proc == "классика":
             summ = m_sum_kred
@@ -1115,14 +1210,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 # учет переплаты
                 calc_sum_cred = m_sum_kred / m_srok
-                sum_itog = round(calc_sum_cred + pr + m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal, 2)
+                sum_itog = round(calc_sum_cred + pr + m_sum_one
+                                 + m_sum_year + m_sum_month + m_sum_kvartal, 2)
 
                 mass_param.insert(i - 1,
                                   (d_date.strftime("%Y.%m"),
                                    round(summ, 2),
                                    round(pr, 2),
                                    round(calc_sum_cred, 2),
-                                   round(m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal, 2),
+                                   round(m_sum_one + m_sum_year +
+                                         m_sum_month + m_sum_kvartal, 2),
                                    0,
                                    0))
 
@@ -1181,7 +1278,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                              mass_param[i - 1][5],
                                              mass_param[i - 1][6])
 
-                        sum_itog = round(calc_sum_cred + pr + m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal, 2)
+                        sum_itog = round(calc_sum_cred + pr + m_sum_one +
+                                         m_sum_year + m_sum_month + m_sum_kvartal, 2)
                         #########################################################################
                     summ -= (m_sum_plat - round(pr, 2))
                 else:
@@ -1199,10 +1297,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 # +1 месяц
                 d_date = d_date + relativedelta(months=1)
                 n_pr += pr
-                n_ob = n_ob + calc_sum_cred + pr + m_sum_one + sum_pereplata + m_sum_year + m_sum_month + m_sum_kvartal
+                n_ob = (n_ob + calc_sum_cred + pr + m_sum_one + sum_pereplata
+                        + m_sum_year + m_sum_month + m_sum_kvartal)
                 n_cred += calc_sum_cred
                 n_perepl += sum_pereplata
-                summ_dop = summ_dop + m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal
+                summ_dop = (summ_dop + m_sum_one + m_sum_year
+                            + m_sum_month + m_sum_kvartal)
                 m_sum_one = 0
                 if summ < 0:
                     break
@@ -1247,14 +1347,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # добавляем
             if m_sum_end > 0:
                 i_end = len(self._datarow) - 1
-                self._datarow[i_end] = (self._datarow[i_end][0],
-                                        self._datarow[i_end][1],
-                                        self._datarow[i_end][2],
-                                        self._datarow[i_end][3],
-                                        self._datarow[i_end][4],
-                                        "{:.2f}".format(float(self._datarow[i_end][5]) + m_sum_end),
-                                        "{:.2f}".format(float(self._datarow[i_end][6]) + m_sum_end),
-                                        self._datarow[i_end][7])
+                self._datarow[i_end] = \
+                    (self._datarow[i_end][0],
+                     self._datarow[i_end][1],
+                     self._datarow[i_end][2],
+                     self._datarow[i_end][3],
+                     self._datarow[i_end][4],
+                     "{:.2f}".format(float(self._datarow[i_end][5]) + m_sum_end),
+                     "{:.2f}".format(float(self._datarow[i_end][6]) + m_sum_end),
+                     self._datarow[i_end][7])
 
             # Итого
             mTColorType = QColor(144, 238, 144)  # LightGreen
@@ -1279,7 +1380,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                   "{:.2f}".format(round(n_pr + summ_dop, 2)),
                                   mTColorType))
             self.pereplata.setProperty("value", (n_pr + summ_dop))
-        # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         # Рассрочка
         elif m_type_proc == "рассрочка":
             summ = m_sum_kred
@@ -1348,14 +1449,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.month_itog.setProperty("value", self.buff_sum_dop_m)
 
                 calc_sum_cred = m_sum_kred / m_srok
-                sum_itog = round(calc_sum_cred + pr + m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal, 2)
+                sum_itog = round(calc_sum_cred + pr + m_sum_one +
+                                 m_sum_year + m_sum_month + m_sum_kvartal, 2)
 
                 mass_param.insert(i - 1,
                                   (d_date.strftime("%Y.%m"),
                                    round(summ, 2),
                                    round(pr, 2),
                                    round(calc_sum_cred, 2),
-                                   round(m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal, 2),
+                                   round(m_sum_one + m_sum_year +
+                                         m_sum_month + m_sum_kvartal, 2),
                                    0,
                                    0))
 
@@ -1390,8 +1493,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                             nk = m_curs_year_2 / m_curs_start
                         elif int(d_date.year) == int(d_date_etalon.year) + 3:
                             nk = m_curs_year_3 / m_curs_start
-                        elif int(d_date.year) == (int(d_date_etalon.year) + 4) or int(d_date.year) > int(
-                                d_date_etalon.year) + 4:
+                        elif (int(d_date.year) == (int(d_date_etalon.year) + 4)
+                              or int(d_date.year) > int(d_date_etalon.year) + 4):
                             nk = m_curs_year_4 / m_curs_start
                         else:
                             nk = 0
@@ -1408,7 +1511,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                              mass_param[i - 1][5],
                                              mass_param[i - 1][6])
 
-                        sum_itog = round(calc_sum_cred + pr + m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal, 2)
+                        sum_itog = round(calc_sum_cred + pr + m_sum_one +
+                                         m_sum_year + m_sum_month + m_sum_kvartal, 2)
                         #########################################################
 
                     summ -= (m_sum_plat - round(pr, 2))
@@ -1427,10 +1531,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 # +1 месяц
                 d_date = d_date + relativedelta(months=1)
                 n_pr += pr
-                n_ob = n_ob + calc_sum_cred + pr + m_sum_one + sum_pereplata + m_sum_year + m_sum_month + m_sum_kvartal
+                n_ob = (n_ob + calc_sum_cred + pr + m_sum_one + sum_pereplata +
+                        m_sum_year + m_sum_month + m_sum_kvartal)
                 n_cred += calc_sum_cred
                 n_perepl += sum_pereplata
-                summ_dop = summ_dop + m_sum_one + m_sum_year + m_sum_month + m_sum_kvartal
+                summ_dop = (summ_dop + m_sum_one + m_sum_year +
+                            m_sum_month + m_sum_kvartal)
                 m_sum_one = 0
                 if summ < 0:
                     break
@@ -1475,14 +1581,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # добавляем
             if m_sum_end > 0:
                 i_end = len(self._datarow) - 1
-                self._datarow[i_end] = (self._datarow[i_end][0],
-                                        self._datarow[i_end][1],
-                                        self._datarow[i_end][2],
-                                        self._datarow[i_end][3],
-                                        self._datarow[i_end][4],
-                                        "{:.2f}".format(float(self._datarow[i_end][5]) + m_sum_end),
-                                        "{:.2f}".format(float(self._datarow[i_end][6]) + m_sum_end),
-                                        self._datarow[i_end][7])
+                self._datarow[i_end] = \
+                    (self._datarow[i_end][0],
+                     self._datarow[i_end][1],
+                     self._datarow[i_end][2],
+                     self._datarow[i_end][3],
+                     self._datarow[i_end][4],
+                     "{:.2f}".format(float(self._datarow[i_end][5]) + m_sum_end),
+                     "{:.2f}".format(float(self._datarow[i_end][6]) + m_sum_end),
+                     self._datarow[i_end][7])
 
             # Итого
             mTColorType = QColor(144, 238, 144)  # LightGreen
@@ -1573,37 +1680,46 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # calc
         if self.is_exists_perv_vznos_proc:
-            self.perv_vznos.setProperty("value",
-                                        self.proc_perv_vznos.value() * self.summa.value() * self.curs.value() / 100)
+            self.perv_vznos.setProperty(
+                "value",
+                self.proc_perv_vznos.value() * self.summa.value() *
+                self.curs.value() / 100)
 
-        self.summa_ekv.setProperty("value", self.summa.value() * self.curs.value())
+        self.summa_ekv.setProperty(
+            "value", self.summa.value() * self.curs.value())
         calc_sum_cred = self.summa_ekv.value() - self.perv_vznos.value()
-        self.sum_kred.setProperty("value", 0 if calc_sum_cred <= 0 else calc_sum_cred)
+        self.sum_kred.setProperty(
+            "value", 0 if calc_sum_cred <= 0 else calc_sum_cred)
 
     ######################################
     # event - srok_cred - valueChanged
     def on_srok_cred_value_changed(self):
-        self.srok_kred_year.setProperty("value", self.srok_kred.value() / 12)
+        self.srok_kred_year.setProperty(
+            "value", self.srok_kred.value() / 12)
 
     ######################################
     # event - priv_srok_cred - valueChanged
     def on_priv_srok_cred_value_changed(self):
-        self.priv_srok_kred_year.setProperty("value", self.priv_srok_kred.value() / 12)
+        self.priv_srok_kred_year.setProperty(
+            "value", self.priv_srok_kred.value() / 12)
 
     ######################################
     # event - priv_srok_cred2 - valueChanged
     def on_priv_srok_cred2_value_changed(self):
-        self.priv_srok_kred_year2.setProperty("value", self.priv_srok_kred2.value() / 12)
+        self.priv_srok_kred_year2.setProperty(
+            "value", self.priv_srok_kred2.value() / 12)
 
     ######################################
     # event - priv_srok_cred3 - valueChanged
     def on_priv_srok_cred3_value_changed(self):
-        self.priv_srok_kred_year3.setProperty("value", self.priv_srok_kred3.value() / 12)
+        self.priv_srok_kred_year3.setProperty(
+            "value", self.priv_srok_kred3.value() / 12)
 
     ######################################
     # event - srok_cred_new - valueChanged
     def on_srok_cred_new_value_changed(self):
-        self.srok_kred_year_new.setProperty("value", self.srok_kred_new.value() / 12)
+        self.srok_kred_year_new.setProperty(
+            "value", self.srok_kred_new.value() / 12)
 
     ######################################
     # event - type_calc - currentIndexChanged
@@ -1616,9 +1732,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         match value:
             case "классика":
                 self.type_annuitet.setEnabled(True)
-                self.type_annuitet.setCurrentText("30/360"
-                                                  if self.type_annuitet.currentText() == ""
-                                                  else self.type_annuitet.currentText())
+                self.type_annuitet.setCurrentText(
+                    "30/360"
+                    if self.type_annuitet.currentText() == ""
+                    else self.type_annuitet.currentText())
                 self.groupBox_rasrochka.setEnabled(False)
                 self.priv_proc_stavka.setEnabled(True)
                 self.priv_proc_stavka2.setEnabled(True)
@@ -1629,9 +1746,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.check_recalc_graf.setEnabled(False)
             case "аннуитетная":
                 self.type_annuitet.setEnabled(True)
-                self.type_annuitet.setCurrentText("30/360"
-                                                  if self.type_annuitet.currentText() == ""
-                                                  else self.type_annuitet.currentText())
+                self.type_annuitet.setCurrentText(
+                    "30/360"
+                    if self.type_annuitet.currentText() == ""
+                    else self.type_annuitet.currentText())
                 self.groupBox_rasrochka.setEnabled(False)
                 self.priv_proc_stavka.setEnabled(True)
                 self.priv_proc_stavka2.setEnabled(False)
@@ -1667,7 +1785,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     ######################################
     # event - button_json_file - Clicked
     def on_button_json_file_clicked_(self):
-        subprocess.call(['notepad.exe', self._list_type_calc_file[self.type_calc.currentIndex()]])
+        subprocess.call(['notepad.exe',
+                         self._list_type_calc_file[self.type_calc.currentIndex()]])
         # os.startfile(self._list_type_calc_file[self.type_calc.currentIndex()])
 
     ######################################
