@@ -10,14 +10,15 @@ IDE - PyCharm Community Edition
 У командному рядку терміналу IDE
 1) Додаємо бібліотеки
 -> pip install PyQt6
--> pip install pyqt6-tools
 -> pip install python-dateutil
 -> pip install xmltodict
 
 2) Qt Designer
-Запускаємо
--> pyqt6-tools designer або окремо встановлюємо:
-   https://build-system.fman.io/qt-designer-download
+Окремо встановлюємо:
+-> https://build-system.fman.io/qt-designer-download
+або:
+-> pip install pyqt6-tools
+   Запускаємо -> pyqt6-tools designer
 
 3) Перетворення *.ui файлу у файл типу *.py
 -> pyuic6 MainWindow.ui -o ui_MainWindow.py
@@ -33,3 +34,7 @@ IDE - PyCharm Community Edition
 
 2) Запускаємо файл .\Kred_calc_create_EXE_file.bat для автоматичної збірки exe файла
 Сформований файл буде розташований у каталозі \dist\
+
+PyCharm Community Edition -> Off message Typo: In word 'XXXXX'
+IDE in Settings -> Editor -> Inspections -> Proofreading -> Typo.
+Зняти галки з "Process code" та "Process literals" та "Process comments"

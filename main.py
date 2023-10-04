@@ -17,7 +17,7 @@ from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox, QWidget
 from ui_MainWindow import Ui_MainWindow
 
 
-class Error_MessageBox_Window(QWidget):
+class ErrorMessageBoxWindow(QWidget):
     def __init__(self, text_error, is_exit=True):
         super().__init__()
         dialog = QMessageBox.critical(self, "Error", text_error,
@@ -27,13 +27,13 @@ class Error_MessageBox_Window(QWidget):
 
 
 ##################################
-# Read_curs
-class Read_curs:
+# ReadCurs
+class ReadCurs:
     def __init__(self, date_cred, curr_code):
         try:
             file_settings = 'settings_curs_nbu.json'
             if not os.path.isfile(file_settings):
-                Error_MessageBox_Window(
+                ErrorMessageBoxWindow(
                     text_error="File 'settings_curs_nbu.json' not found").show()
 
             # Opening JSON file
@@ -54,7 +54,7 @@ class Read_curs:
                 self.char_curs = data['main']['curs_nbu_xml']['char_curs']
                 self.char_format_date = data['main']['curs_nbu_xml']['char_format_date']
             else:
-                Error_MessageBox_Window(
+                ErrorMessageBoxWindow(
                     text_error="File 'settings_curs_nbu.json' -> "
                                "parameter 'data_format' not in "
                                "'xml' or 'json'").show()
@@ -94,13 +94,13 @@ class Read_curs:
                 url = (self.url.replace("%MDATE%",
                                         date_cred.strftime(self.char_format_date))
                        .replace("%CURRCODE%", curr_code))
-                webURL = urllib.request.urlopen(url)
-                data = webURL.read()
+                web_url = urllib.request.urlopen(url)
+                data = web_url.read()
 
                 if self.data_format == 'json':
-                    JSON_object = json.loads(data.decode('utf-8'))
+                    json_object = json.loads(data.decode('utf-8'))
                     # write data
-                    for json_line in JSON_object:
+                    for json_line in json_object:
                         params = (date_cred.strftime("%Y-%m-%d"),
                                   json_line[self.char_curr_code],
                                   json_line[self.char_curs],
@@ -111,9 +111,9 @@ class Read_curs:
                             "VALUES(?, ?, ?, ?)",
                             params)
                 elif self.data_format == 'xml':
-                    JSON_object = xmltodict.parse(data.decode('utf-8'))
+                    json_object = xmltodict.parse(data.decode('utf-8'))
                     # write data
-                    json_line = JSON_object["exchange"]["currency"]
+                    json_line = json_object["exchange"]["currency"]
                     params = (date_cred.strftime("%Y-%m-%d"),
                               json_line[self.char_curr_code],
                               json_line[self.char_curs],
@@ -140,13 +140,13 @@ class Read_curs:
 
 
 ##################################
-# Read_type_calc
-class Read_type_calc:
+# ReadTypeCalc
+class ReadTypeCalc:
     def __init__(self):
         try:
             dir_ini = os.getcwd() + "\\ini"
             if not os.path.isdir(dir_ini):
-                Error_MessageBox_Window(
+                ErrorMessageBoxWindow(
                     text_error=dir_ini + " directory not found").show()
 
             filenames = [fn for fn in os.listdir(dir_ini)
@@ -166,12 +166,12 @@ class Read_type_calc:
 
 
 ##################################
-# Update_type_calc
-class Update_type_calc:
+# UpdateTypeCalc
+class UpdateTypeCalc:
     def __init__(self, type_calc_file):
         try:
             if not os.path.isfile(type_calc_file):
-                Error_MessageBox_Window(type_calc_file + " file not found").show()
+                ErrorMessageBoxWindow(type_calc_file + " file not found").show()
 
             # Opening JSON file
             f = open(file=type_calc_file, mode="r", encoding="utf8")
@@ -330,7 +330,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             QtCore.QDateTime(QtCore.QDate.currentDate(), QtCore.QTime.currentTime()))
 
         # read type calc
-        tc = Read_type_calc()
+        tc = ReadTypeCalc()
         self._list_type_calc_file = tc.list_type_calc_file
         self.type_calc.addItems(tc.list_type_calc)
 
@@ -399,7 +399,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # read type calc params
     def read_type_calc_params(self, list_type_calc_file):
         # read type calc params
-        update_tc = Update_type_calc(list_type_calc_file)
+        update_tc = UpdateTypeCalc(list_type_calc_file)
         #
         self.priv_proc_stavka.setProperty(
             "value", update_tc.param_main_priv_proc_stavka)
@@ -929,7 +929,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.buff_sum_dop_m = 0
 
         if m_sum_kred == 0:
-            Error_MessageBox_Window(
+            ErrorMessageBoxWindow(
                 "Расчет и вывод графика невозможен !!! Не расчитана СУММА КРЕДИТА!!!",
                 is_exit=False).show()
             return
@@ -1014,9 +1014,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     sum_pereplata = m_sum_plat - annuitet
 
                 if (int(d_date.strftime("%Y"))) % 2 == 0:
-                    mTColorType = QColor(255, 228, 225)  # MistyRose
+                    m_color_type = QColor(255, 228, 225)  # MistyRose
                 else:
-                    mTColorType = QColor(240, 248, 255)  # AliceBlue
+                    m_color_type = QColor(240, 248, 255)  # AliceBlue
 
                 # корректируем последний этап переплаты
                 if ((summ_calc_pereplata - annuitet - sum_pereplata +
@@ -1062,7 +1062,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                    "{:.2f}".format((annuitet + m_sum_one + m_sum_year +
                                     m_sum_month + m_sum_kvartal
                                     + sum_pereplata)),
-                   mTColorType)))
+                   m_color_type)))
                 # +1 месяц
                 d_date = d_date + relativedelta(months=1)
                 summ_plat += annuitet - summ_pro
@@ -1117,7 +1117,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                      self._datarow[i_end][7])
 
             # Итого
-            mTColorType = QColor(144, 238, 144)  # LightGreen
+            m_color_type = QColor(144, 238, 144)  # LightGreen
             self._datarow.insert(i,
                                  ("Итого:",
                                   None,
@@ -1127,9 +1127,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                   "{:.2f}".format(summ_dop),
                                   "{:.2f}".format((summ_calc_pro + summ_plat +
                                                    summ_itog_pereplata + summ_dop)),
-                                  mTColorType))
+                                  m_color_type))
             # Переплата
-            mTColorType = QColor(173, 216, 230)  # LightBlue
+            m_color_type = QColor(173, 216, 230)  # LightBlue
             self._datarow.insert(i + 1,
                                  ("Переплата:",
                                   None,
@@ -1138,7 +1138,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                   None,
                                   None,
                                   "{:.2f}".format((summ_calc_pro + summ_dop)),
-                                  mTColorType))
+                                  m_color_type))
             self.pereplata.setProperty("value", (summ_calc_pro + summ_dop))
 
         # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1314,9 +1314,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             while i <= len(mass_param):
 
                 if int(mass_param[i - 1][0][0:4]) % 2 == 0:
-                    mTColorType = QColor(255, 228, 225)  # MistyRose
+                    m_color_type = QColor(255, 228, 225)  # MistyRose
                 else:
-                    mTColorType = QColor(240, 248, 255)  # AliceBlue
+                    m_color_type = QColor(240, 248, 255)  # AliceBlue
 
                 # добавляем строку
                 self._datarow.insert(i - 1,
@@ -1327,7 +1327,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                       "{:.2f}".format(float(mass_param[i - 1][6])),
                                       "{:.2f}".format(float(mass_param[i - 1][4])),
                                       "{:.2f}".format(float(mass_param[i - 1][5])),
-                                      mTColorType))
+                                      m_color_type))
                 srok_new += 1
                 i += 1
 
@@ -1358,7 +1358,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                      self._datarow[i_end][7])
 
             # Итого
-            mTColorType = QColor(144, 238, 144)  # LightGreen
+            m_color_type = QColor(144, 238, 144)  # LightGreen
             self._datarow.insert(i,
                                  ("Итого:",
                                   None,
@@ -1367,9 +1367,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                   "{:.2f}".format(n_perepl),
                                   "{:.2f}".format(summ_dop),
                                   "{:.2f}".format(n_ob + m_sum_end),
-                                  mTColorType))
+                                  m_color_type))
             # Переплата
-            mTColorType = QColor(173, 216, 230)  # LightBlue
+            m_color_type = QColor(173, 216, 230)  # LightBlue
             self._datarow.insert(i + 1,
                                  ("Переплата:",
                                   None,
@@ -1378,7 +1378,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                   None,
                                   None,
                                   "{:.2f}".format(round(n_pr + summ_dop, 2)),
-                                  mTColorType))
+                                  m_color_type))
             self.pereplata.setProperty("value", (n_pr + summ_dop))
         # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         # Рассрочка
@@ -1548,9 +1548,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             while i <= len(mass_param):
 
                 if int(mass_param[i - 1][0][0:4]) % 2 == 0:
-                    mTColorType = QColor(255, 228, 225)  # MistyRose
+                    m_color_type = QColor(255, 228, 225)  # MistyRose
                 else:
-                    mTColorType = QColor(240, 248, 255)  # AliceBlue
+                    m_color_type = QColor(240, 248, 255)  # AliceBlue
 
                 # добавляем строку
                 self._datarow.insert(i - 1,
@@ -1561,7 +1561,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                       "{:.2f}".format(float(mass_param[i - 1][6])),
                                       "{:.2f}".format(float(mass_param[i - 1][4])),
                                       "{:.2f}".format(float(mass_param[i - 1][5])),
-                                      mTColorType))
+                                      m_color_type))
                 srok_new += 1
                 i += 1
 
@@ -1592,7 +1592,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                      self._datarow[i_end][7])
 
             # Итого
-            mTColorType = QColor(144, 238, 144)  # LightGreen
+            m_color_type = QColor(144, 238, 144)  # LightGreen
             self._datarow.insert(i,
                                  ("Итого:",
                                   None,
@@ -1601,9 +1601,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                   "{:.2f}".format(n_perepl),
                                   "{:.2f}".format(summ_dop),
                                   "{:.2f}".format(n_ob + m_sum_end),
-                                  mTColorType))
+                                  m_color_type))
             # Переплата
-            mTColorType = QColor(173, 216, 230)  # LightBlue
+            m_color_type = QColor(173, 216, 230)  # LightBlue
             self._datarow.insert(i + 1,
                                  ("Переплата:",
                                   None,
@@ -1612,7 +1612,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                   None,
                                   None,
                                   "{:.2f}".format(round(n_pr + summ_dop, 2)),
-                                  mTColorType))
+                                  m_color_type))
             self.pereplata.setProperty("value", (n_pr + summ_dop))
 
     ######################################
@@ -1624,7 +1624,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.curs.setEnabled(False)
         else:
             # Read curs
-            p = Read_curs(value.toPyDate(), self.curr_code.currentText())
+            p = ReadCurs(value.toPyDate(), self.curr_code.currentText())
             self.curs.setProperty("value", p.curs_amount)
             self.curs.setEnabled(True)
 
@@ -1637,7 +1637,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.curs.setEnabled(False)
         else:
             # Read curs
-            p = Read_curs(self.date_cred.date().toPyDate(), value)
+            p = ReadCurs(self.date_cred.date().toPyDate(), value)
             self.curs.setProperty("value", p.curs_amount)
             self.curs.setEnabled(True)
 
